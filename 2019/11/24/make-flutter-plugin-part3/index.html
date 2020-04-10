@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html  lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Flutter plugin 개발하기 - part3 Android 환경 세팅 (Kotlin) 및 개발하기 - Wonjerry</title>
+
+
+    <meta name="description" content="Flutter plugin Android 파트에서 WifiManager를 통해 wifi 연결을 구현하고 실제 동작을 확인해봅시다!">
+<meta name="keywords" content="flutter,flutter plugin,플러터 플러그인,flutter packages,wifi,Android,Kotlin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter plugin 개발하기 - part3 Android 환경 세팅 (Kotlin) 및 개발하기">
+<meta property="og:url" content="https:&#x2F;&#x2F;wonjerry.github.io&#x2F;2019&#x2F;11&#x2F;24&#x2F;make-flutter-plugin-part3&#x2F;index.html">
+<meta property="og:site_name" content="Wonjerry">
+<meta property="og:description" content="Flutter plugin Android 파트에서 WifiManager를 통해 wifi 연결을 구현하고 실제 동작을 확인해봅시다!">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https:&#x2F;&#x2F;wonjerry.github.io&#x2F;images&#x2F;flutter.png">
+<meta property="og:updated_time" content="2020-04-08T05:51:18.154Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wonjerry.github.io&#x2F;images&#x2F;flutter.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108191783-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-108191783-1');
+</script>
+<script data-ad-client="ca-pub-3462032761844105" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="alternate" href="/rss2.xml" title="Wonjerry" type="application/rss+xml">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                Wonjerry
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wonjerry">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/flutter.png" alt="Flutter plugin 개발하기 - part3 Android 환경 세팅 (Kotlin) 및 개발하기">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-23T15:00:00.000Z">2019-11-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9분 읽기 (나에 대하여 1397 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Flutter plugin 개발하기 - part3 Android 환경 세팅 (Kotlin) 및 개발하기
+            
+        </h1>
+        <div class="content">
+            <p>이야기를 하기에 앞서, 이 글은 네가지 파트로 나뉘어져 있습니다. 각 글을 나눈 기준은 제가 항상 Flutter로 개발하면서 작업을 나누는 단위입니다. 각 단위 내에서도 더 작게 쪼개지지만 플랫폼 관련 기능을 구현할 때는 Flutter -&gt; iOS -&gt; Android 순서로 작업합니다. (Android보다 iOS쪽이 제약이 많기 때문에 기능 확인차 이렇게 하고있습니다.)</p>
+<ul>
+<li><a href="https://wonjerry.github.io/2019/11/10/make-flutter-plugin-part1/">Flutter plugin 만들기 part1 - Create Flutter Plugin</a></li>
+<li><a href="https://wonjerry.github.io/2019/11/13/make-flutter-plugin-part2/">Flutter plugin 만들기 part2 - iOS 환경 세팅 (Swift) 및 개발하기</a></li>
+<li><a href="https://wonjerry.github.io/2019/11/24/make-flutter-plugin-part3/">Flutter plugin 만들기 part3 - Android 환경 세팅 및 개발하기</a></li>
+<li><a href="https://wonjerry.github.io/2019/11/25/make-flutter-plugin-part4/">Flutter Plugin 만들기 part4 - 플러그인 배포하기</a></li>
+</ul>
+<h2 id="프로젝트-열기"><a href="#프로젝트-열기" class="headerlink" title="프로젝트 열기"></a>프로젝트 열기</h2><p><img src="/images/embarrassed.jpg" alt></p>
+<p>필자는 Flutter plugin을 개발할 때 난관이 “어느 프로젝트를 열어야 하는거지?” 였다. iOS쪽은 애를 먹었지만, Android쪽은 안드로이드 스튜디오에서 여니 찾기 편했다.</p>
+<p>iOS와 동일하게 <strong>example 내부의 Android 프로젝트를 열어서 개발해야한다!</strong></p>
+<p>백문이 불여일견! Android studio로 example Android 프로젝트를 열었을 때의 directory tree를 살펴보자. Android studio에서 <code>wifi_connector/example/android</code> 를 열면 된다.</p>
+<p><img src="/images/make-flutter-plugin-part3-directory.png" alt></p>
+<ul>
+<li>Android Studio에서 디렉토리 뷰를 project뷰로 설정하면 3가지 프로젝트 (app, wifi_connector, android)가 잡혀있는 것을 볼 수 있다.<ul>
+<li>1번은 wifi_connector 내부에 있는 파일들이 우리가 개발중인 플러그인의 android쪽이이다.<ul>
+<li>wifi 연결하는 기능을 저 내부에 WifiConnectorPlugin에 개발하고, method channel을 call해서 사용하면 된다.</li>
+</ul>
+</li>
+<li>2번은 android 내부에 있는 파일들은 example 프로젝트의 파일들이다. 우리는 여기서 건드릴것이 없다. 플러그인에서 구현된 기능을 flutter쪽에서 가져다 쓸 것이기 때문이다</li>
+</ul>
+</li>
+</ul>
+<h2 id="코드-설명"><a href="#코드-설명" class="headerlink" title="코드 설명"></a>코드 설명</h2><h3 id="Plugin이-Activity와-연결될-때-context를-받아와서-저장-해-두고-사용한다"><a href="#Plugin이-Activity와-연결될-때-context를-받아와서-저장-해-두고-사용한다" class="headerlink" title="Plugin이 Activity와 연결될 때 context를 받아와서 저장 해 두고 사용한다."></a>Plugin이 Activity와 연결될 때 context를 받아와서 저장 해 두고 사용한다.</h3><figure class="highlight kotlin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.wonjerry.wifi_connector</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WifiConnectorPlugin</span> : <span class="hljs-type">MethodCallHandler</span>, <span class="hljs-type">FlutterPlugin &#123;</span></span></span><br><span class="line">  <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> &#123;</span><br><span class="line">    <span class="hljs-meta">@JvmStatic</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">registerWith</span><span class="hljs-params">(registrar: <span class="hljs-type">Registrar</span>)</span></span> &#123;</span><br><span class="line">      <span class="hljs-keyword">val</span> instance = WifiConnectorPlugin()</span><br><span class="line">      <span class="hljs-comment">// activity의 context를 받아오기위해 FlutterPlugin을 상속받고, interface들을 구현한다.</span></span><br><span class="line">      instance.onAttachedToEngine(registrar.context(), registrar.messenger())</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> activityContext: Context? = <span class="hljs-literal">null</span></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> methodChannel: MethodChannel? = <span class="hljs-literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// Plugin이 Flutter Activity와 연결되었을 때 불리는 callback method이다.</span></span><br><span class="line">  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onAttachedToEngine</span><span class="hljs-params">(binding: <span class="hljs-type">FlutterPlugin</span>.<span class="hljs-type">FlutterPluginBinding</span>)</span></span> &#123;</span><br><span class="line">    onAttachedToEngine(binding.applicationContext, binding.flutterEngine.dartExecutor)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// Plugin이 Flutter Activity와 연결이 떨어졌을 때 불리는 callback method이다.</span></span><br><span class="line">  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onDetachedFromEngine</span><span class="hljs-params">(p0: <span class="hljs-type">FlutterPlugin</span>.<span class="hljs-type">FlutterPluginBinding</span>)</span></span> &#123;</span><br><span class="line">    activityContext = <span class="hljs-literal">null</span></span><br><span class="line">    methodChannel?.setMethodCallHandler(<span class="hljs-literal">null</span>)</span><br><span class="line">    methodChannel = <span class="hljs-literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// Plugin이 Flutter Activity와 연결되었을 때 context를 저장 해 둔다.</span></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onAttachedToEngine</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>, messenger: <span class="hljs-type">BinaryMessenger</span>)</span></span> &#123;</span><br><span class="line">    activityContext = context</span><br><span class="line">    methodChannel = MethodChannel(messenger, <span class="hljs-string">"wifi_connector"</span>).apply &#123;</span><br><span class="line">      setMethodCallHandler(<span class="hljs-keyword">this</span><span class="hljs-symbol">@WifiConnectorPlugin</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="method-channel을-통해-온-call을-handling-한다"><a href="#method-channel을-통해-온-call을-handling-한다" class="headerlink" title="method channel을 통해 온 call을 handling 한다."></a>method channel을 통해 온 call을 handling 한다.</h3><figure class="highlight kotlin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onMethodCall</span><span class="hljs-params">(call: <span class="hljs-type">MethodCall</span>, result: <span class="hljs-type">Result</span>)</span></span> &#123;</span><br><span class="line">  <span class="hljs-keyword">when</span> (call.method) &#123;</span><br><span class="line">    <span class="hljs-string">"connectToWifi"</span> -&gt; connectToWifi(call, result)</span><br><span class="line">    <span class="hljs-keyword">else</span> -&gt; result.notImplemented()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="ssid-password를-받아서-wifi에-연결한다"><a href="#ssid-password를-받아서-wifi에-연결한다" class="headerlink" title="ssid, password를 받아서 wifi에 연결한다."></a>ssid, password를 받아서 wifi에 연결한다.</h3><figure class="highlight kotlin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">connectToWifi</span><span class="hljs-params">(call: <span class="hljs-type">MethodCall</span>, result: <span class="hljs-type">MethodChannel</span>.<span class="hljs-type">Result</span>)</span></span> &#123;</span><br><span class="line">  <span class="hljs-keyword">val</span> argMap = call.arguments <span class="hljs-keyword">as</span> Map&lt;String, Any&gt;</span><br><span class="line">  <span class="hljs-keyword">val</span> ssid = argMap[<span class="hljs-string">"ssid"</span>] <span class="hljs-keyword">as</span> String</span><br><span class="line">  <span class="hljs-keyword">val</span> password = argMap[<span class="hljs-string">"password"</span>] <span class="hljs-keyword">as</span> String?</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 비밀번호가 있냐 없냐에 따라 wifi configration을 설정한다.</span></span><br><span class="line">  <span class="hljs-keyword">val</span> wifiConfiguration =</span><br><span class="line">          <span class="hljs-keyword">if</span> (password == <span class="hljs-literal">null</span>) &#123;</span><br><span class="line">            WifiConfiguration().apply &#123;</span><br><span class="line">              SSID = wrapWithDoubleQuotes(ssid)</span><br><span class="line">              status = WifiConfiguration.Status.CURRENT</span><br><span class="line">              allowedKeyManagement.<span class="hljs-keyword">set</span>(WifiConfiguration.KeyMgmt.NONE)</span><br><span class="line">            &#125;</span><br><span class="line">          &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            WifiConfiguration().apply &#123;</span><br><span class="line">              SSID = wrapWithDoubleQuotes(ssid)</span><br><span class="line">              preSharedKey = wrapWithDoubleQuotes(password)</span><br><span class="line">              status = WifiConfiguration.Status.CURRENT</span><br><span class="line">              allowedKeyManagement.<span class="hljs-keyword">set</span>(WifiConfiguration.KeyMgmt.WPA_PSK)</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">val</span> wifiManager = activityContext?.applicationContext?.getSystemService(Context.WIFI_SERVICE) <span class="hljs-keyword">as</span> WifiManager</span><br><span class="line"></span><br><span class="line">  with(wifiManager) &#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (!isWifiEnabled) &#123;</span><br><span class="line">      isWifiEnabled = <span class="hljs-literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 위에서 생성한 configration을 추가하고 해당 네트워크와 연결한다.</span></span><br><span class="line">    addNetwork(wifiConfiguration)</span><br><span class="line">    configuredNetworks.find &#123; network -&gt;</span><br><span class="line">      network.SSID == wrapWithDoubleQuotes(ssid)</span><br><span class="line">    &#125;?.let &#123; network -&gt;</span><br><span class="line">      disconnect()</span><br><span class="line">      enableNetwork(network.networkId, <span class="hljs-literal">true</span>)</span><br><span class="line">      reconnect()</span><br><span class="line">      result.success(<span class="hljs-literal">true</span>)</span><br><span class="line">    &#125; ?: let &#123;</span><br><span class="line">      result.success(<span class="hljs-literal">false</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="wifi-권한"><a href="#wifi-권한" class="headerlink" title="wifi 권한"></a>wifi 권한</h2><p>Android에서 wifiManager를 통해 programming 적으로 wifi를 제어하기 위해서는 권한이 필요하다.</p>
+<p><code>AndroidManifest.xml</code>에 권한 두가지를 추가 해 준다.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">  package=&quot;com.wonjerry.wifi_connector&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.CHANGE_WIFI_STATE&quot; /&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Total-code"><a href="#Total-code" class="headerlink" title="Total code"></a>Total code</h3><figure class="highlight kotlin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.wonjerry.wifi_connector</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> android.content.Context</span><br><span class="line"><span class="hljs-keyword">import</span> android.net.wifi.WifiConfiguration</span><br><span class="line"><span class="hljs-keyword">import</span> android.net.wifi.WifiManager</span><br><span class="line"><span class="hljs-keyword">import</span> io.flutter.embedding.engine.plugins.FlutterPlugin</span><br><span class="line"><span class="hljs-keyword">import</span> io.flutter.plugin.common.BinaryMessenger</span><br><span class="line"><span class="hljs-keyword">import</span> io.flutter.plugin.common.MethodCall</span><br><span class="line"><span class="hljs-keyword">import</span> io.flutter.plugin.common.MethodChannel</span><br><span class="line"><span class="hljs-keyword">import</span> io.flutter.plugin.common.MethodChannel.MethodCallHandler</span><br><span class="line"><span class="hljs-keyword">import</span> io.flutter.plugin.common.MethodChannel.Result</span><br><span class="line"><span class="hljs-keyword">import</span> io.flutter.plugin.common.PluginRegistry.Registrar</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WifiConnectorPlugin</span> : <span class="hljs-type">MethodCallHandler</span>, <span class="hljs-type">FlutterPlugin &#123;</span></span></span><br><span class="line">  <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> &#123;</span><br><span class="line">    <span class="hljs-meta">@JvmStatic</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">registerWith</span><span class="hljs-params">(registrar: <span class="hljs-type">Registrar</span>)</span></span> &#123;</span><br><span class="line">      <span class="hljs-keyword">val</span> instance = WifiConnectorPlugin()</span><br><span class="line">      <span class="hljs-comment">// activity의 context를 받아오기위해 FlutterPlugin을 상속받고, interfacee들을 구현한다.</span></span><br><span class="line">      instance.onAttachedToEngine(registrar.context(), registrar.messenger())</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> activityContext: Context? = <span class="hljs-literal">null</span></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> methodChannel: MethodChannel? = <span class="hljs-literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// Plugin이 Flutter Activity와 연결되었을 때 불리는 callback method이다.</span></span><br><span class="line">  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onAttachedToEngine</span><span class="hljs-params">(binding: <span class="hljs-type">FlutterPlugin</span>.<span class="hljs-type">FlutterPluginBinding</span>)</span></span> &#123;</span><br><span class="line">    onAttachedToEngine(binding.applicationContext, binding.flutterEngine.dartExecutor)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// Plugin이 Flutter Activity와 연결이 떨어졌을 때 불리는 callback method이다.</span></span><br><span class="line">  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onDetachedFromEngine</span><span class="hljs-params">(binding: <span class="hljs-type">FlutterPlugin</span>.<span class="hljs-type">FlutterPluginBinding</span>)</span></span> &#123;</span><br><span class="line">    activityContext = <span class="hljs-literal">null</span></span><br><span class="line">    methodChannel?.setMethodCallHandler(<span class="hljs-literal">null</span>)</span><br><span class="line">    methodChannel = <span class="hljs-literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// Plugin이 Flutter Activity와 연결되었을 때 context를 저장 해 둔다.</span></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onAttachedToEngine</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>, messenger: <span class="hljs-type">BinaryMessenger</span>)</span></span> &#123;</span><br><span class="line">    activityContext = context</span><br><span class="line">    methodChannel = MethodChannel(messenger, <span class="hljs-string">"wifi_connector"</span>).apply &#123;</span><br><span class="line">      setMethodCallHandler(<span class="hljs-keyword">this</span><span class="hljs-symbol">@WifiConnectorPlugin</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onMethodCall</span><span class="hljs-params">(call: <span class="hljs-type">MethodCall</span>, result: <span class="hljs-type">Result</span>)</span></span> &#123;</span><br><span class="line">    <span class="hljs-keyword">when</span> (call.method) &#123;</span><br><span class="line">      <span class="hljs-string">"connectToWifi"</span> -&gt; connectToWifi(call, result)</span><br><span class="line">      <span class="hljs-keyword">else</span> -&gt; result.notImplemented()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">connectToWifi</span><span class="hljs-params">(call: <span class="hljs-type">MethodCall</span>, result: <span class="hljs-type">Result</span>)</span></span> &#123;</span><br><span class="line">    <span class="hljs-keyword">val</span> argMap = call.arguments <span class="hljs-keyword">as</span> Map&lt;String, Any&gt;</span><br><span class="line">    <span class="hljs-keyword">val</span> ssid = argMap[<span class="hljs-string">"ssid"</span>] <span class="hljs-keyword">as</span> String</span><br><span class="line">    <span class="hljs-keyword">val</span> password = argMap[<span class="hljs-string">"password"</span>] <span class="hljs-keyword">as</span> String?</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 비밀번호가 있냐 없냐에 따라 wifi configration을 설정한다.</span></span><br><span class="line">    <span class="hljs-keyword">val</span> wifiConfiguration =</span><br><span class="line">            <span class="hljs-keyword">if</span> (password == <span class="hljs-literal">null</span>) &#123;</span><br><span class="line">              WifiConfiguration().apply &#123;</span><br><span class="line">                SSID = wrapWithDoubleQuotes(ssid)</span><br><span class="line">                status = WifiConfiguration.Status.CURRENT</span><br><span class="line">                allowedKeyManagement.<span class="hljs-keyword">set</span>(WifiConfiguration.KeyMgmt.NONE)</span><br><span class="line">              &#125;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">              WifiConfiguration().apply &#123;</span><br><span class="line">                SSID = wrapWithDoubleQuotes(ssid)</span><br><span class="line">                preSharedKey = wrapWithDoubleQuotes(password)</span><br><span class="line">                status = WifiConfiguration.Status.CURRENT</span><br><span class="line">                allowedKeyManagement.<span class="hljs-keyword">set</span>(WifiConfiguration.KeyMgmt.WPA_PSK)</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">val</span> wifiManager = activityContext?.applicationContext?.getSystemService(Context.WIFI_SERVICE) <span class="hljs-keyword">as</span> WifiManager</span><br><span class="line"></span><br><span class="line">    with(wifiManager) &#123;</span><br><span class="line">      <span class="hljs-keyword">if</span> (!isWifiEnabled) &#123;</span><br><span class="line">        isWifiEnabled = <span class="hljs-literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">// 위에서 생성한 configration을 추가하고 해당 네트워크와 연결한다.</span></span><br><span class="line">      addNetwork(wifiConfiguration)</span><br><span class="line">      configuredNetworks.find &#123; network -&gt;</span><br><span class="line">        network.SSID == wrapWithDoubleQuotes(ssid)</span><br><span class="line">      &#125;?.let &#123; network -&gt;</span><br><span class="line">        disconnect()</span><br><span class="line">        enableNetwork(network.networkId, <span class="hljs-literal">true</span>)</span><br><span class="line">        reconnect()</span><br><span class="line">        result.success(<span class="hljs-literal">true</span>)</span><br><span class="line">      &#125; ?: let &#123;</span><br><span class="line">        result.success(<span class="hljs-literal">false</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">wrapWithDoubleQuotes</span><span class="hljs-params">(text: <span class="hljs-type">String</span>)</span></span> = <span class="hljs-string">"\"<span class="hljs-variable">$text</span>\""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="실제-동작-확인"><a href="#실제-동작-확인" class="headerlink" title="실제 동작 확인"></a>실제 동작 확인</h3><p>자 이제 example앱을 빌드하고, ssid, password를 입력하여 wifi에 연결 해 보자!</p>
+<p><img src="/images/wifi_connector_example_android.jpeg" alt></p>
+<p>성공적으로 wifi에 연결되었다! 다음 글에서는 지금까지 구현한 wifi connector를 <a href="http://pub.dev" target="_blank" rel="noopener">pub.dev</a>에 배포해보자!</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Android/" rel="tag">Android</a>, <a class="has-link-grey -link" href="/tags/Kotlin/" rel="tag">Kotlin</a>, <a class="has-link-grey -link" href="/tags/flutter/" rel="tag">flutter</a>, <a class="has-link-grey -link" href="/tags/flutter-packages/" rel="tag">flutter packages</a>, <a class="has-link-grey -link" href="/tags/flutter-plugin/" rel="tag">flutter plugin</a>, <a class="has-link-grey -link" href="/tags/wifi/" rel="tag">wifi</a>, <a class="has-link-grey -link" href="/tags/%ED%94%8C%EB%9F%AC%ED%84%B0-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8/" rel="tag">플러터 플러그인</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/25/make-flutter-plugin-part4/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/13/make-flutter-plugin-part2/">
+                <span class="level-item">Flutter plugin 만들기 - part2 iOS 환경 세팅 (Swift) 및 개발하기</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://wonjerry.github.io/2019/11/24/make-flutter-plugin-part3/';
+        this.page.identifier = '2019/11/24/make-flutter-plugin-part3/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'wonjerry-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/wonjerry.jpg" alt="Wonjerry">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Wonjerry
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Software Engineer at Skelter Labs
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Seoul, Korea</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        포스트
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        카테고리
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        태그
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        46
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wonjerry" target="_blank">
+                팔로우</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wonjerry">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com/lwj.wonjerry">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="https://wonjerry.github.io/rss2.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#프로젝트-열기">
+        <span class="has-mr-6">1</span>
+        <span>프로젝트 열기</span>
+        </a></li><li>
+        <a class="is-flex" href="#코드-설명">
+        <span class="has-mr-6">2</span>
+        <span>코드 설명</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Plugin이-Activity와-연결될-때-context를-받아와서-저장-해-두고-사용한다">
+        <span class="has-mr-6">2.1</span>
+        <span>Plugin이 Activity와 연결될 때 context를 받아와서 저장 해 두고 사용한다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#method-channel을-통해-온-call을-handling-한다">
+        <span class="has-mr-6">2.2</span>
+        <span>method channel을 통해 온 call을 handling 한다.</span>
+        </a></li><li>
+        <a class="is-flex" href="#ssid-password를-받아서-wifi에-연결한다">
+        <span class="has-mr-6">2.3</span>
+        <span>ssid, password를 받아서 wifi에 연결한다.</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#wifi-권한">
+        <span class="has-mr-6">3</span>
+        <span>wifi 권한</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Total-code">
+        <span class="has-mr-6">3.1</span>
+        <span>Total code</span>
+        </a></li><li>
+        <a class="is-flex" href="#실제-동작-확인">
+        <span class="has-mr-6">3.2</span>
+        <span>실제 동작 확인</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            링크
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.io/wonjerry" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Github</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Software-Development/">
+            <span class="level-start">
+                <span class="level-item">Software Development</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Software-Development/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/Flutter/">
+            <span class="level-start">
+                <span class="level-item">Flutter</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/Server/">
+            <span class="level-start">
+                <span class="level-item">Server</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/Tools/">
+            <span class="level-start">
+                <span class="level-item">Tools</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/git/">
+            <span class="level-start">
+                <span class="level-item">git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/nodejs/">
+            <span class="level-start">
+                <span class="level-item">nodejs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/opensource/">
+            <span class="level-start">
+                <span class="level-item">opensource</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/AST/" style="font-size: 10px;">AST</a> <a href="/tags/Android/" style="font-size: 12.5px;">Android</a> <a href="/tags/Bean/" style="font-size: 10px;">Bean</a> <a href="/tags/DI/" style="font-size: 10px;">DI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IOC/" style="font-size: 10px;">IOC</a> <a href="/tags/Kotlin/" style="font-size: 12.5px;">Kotlin</a> <a href="/tags/PSA/" style="font-size: 10px;">PSA</a> <a href="/tags/computer-science/" style="font-size: 10px;">computer science</a> <a href="/tags/context/" style="font-size: 10px;">context</a> <a href="/tags/cs/" style="font-size: 10px;">cs</a> <a href="/tags/declarative-programming/" style="font-size: 10px;">declarative programming</a> <a href="/tags/element-tree/" style="font-size: 10px;">element tree</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/eslint-config/" style="font-size: 10px;">eslint-config</a> <a href="/tags/flutter/" style="font-size: 20px;">flutter</a> <a href="/tags/flutter-packages/" style="font-size: 17.5px;">flutter packages</a> <a href="/tags/flutter-plugin/" style="font-size: 17.5px;">flutter plugin</a> <a href="/tags/imperative-programming/" style="font-size: 10px;">imperative programming</a> <a href="/tags/inherited-widget/" style="font-size: 10px;">inherited widget</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/programming-paradigm/" style="font-size: 10px;">programming paradigm</a> <a href="/tags/provider/" style="font-size: 10px;">provider</a> <a href="/tags/pub-dev/" style="font-size: 10px;">pub.dev</a> <a href="/tags/sentry/" style="font-size: 10px;">sentry</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/stateful-widget/" style="font-size: 10px;">stateful widget</a> <a href="/tags/stateless-widget/" style="font-size: 10px;">stateless widget</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/toy-project/" style="font-size: 15px;">toy project</a> <a href="/tags/tslint/" style="font-size: 10px;">tslint</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/typescript-eslint/" style="font-size: 10px;">typescript-eslint</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/widget-tree/" style="font-size: 10px;">widget tree</a> <a href="/tags/wifi/" style="font-size: 17.5px;">wifi</a> <a href="/tags/%EB%AA%85%EB%A0%B9%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" style="font-size: 10px;">명령형 프로그래밍</a> <a href="/tags/%EC%84%A0%EC%96%B8%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" style="font-size: 10px;">선언형 프로그래밍</a> <a href="/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/" style="font-size: 17.5px;">오픈소스</a> <a href="/tags/%ED%94%8C%EB%9F%AC%ED%84%B0-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8/" style="font-size: 17.5px;">플러터 플러그인</a> <a href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" style="font-size: 10px;">함수형 프로그래밍</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            최근 글
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/09/spring-overview/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/spring_kotlin_logo.png" alt="Spring의 기본 개념 잡아보기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T14:57:21.000Z">2020-04-09</time></div>
+                    <a href="/2020/04/09/spring-overview/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring의 기본 개념 잡아보기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Server/">Server</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/01/eslint/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/eslint_logo.png" alt="ESLint, TSLint, Typescript-ESLint 무엇을 선택해야는가">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T17:09:33.000Z">2020-04-01</time></div>
+                    <a href="/2020/04/01/eslint/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ESLint, TSLint, Typescript-ESLint 무엇을 선택해야는가</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Tools/">Tools</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/02/inheritFromWidgetOfExactType/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/flutter.png" alt="Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T15:00:00.000Z">2020-01-02</time></div>
+                    <a href="/2020/01/02/inheritFromWidgetOfExactType/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/27/programming-paradigm/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/programming_thumbnail.jpg" alt="Programming paradigm과 Flutter UI">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T15:00:00.000Z">2019-12-27</time></div>
+                    <a href="/2019/12/27/programming-paradigm/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Programming paradigm과 Flutter UI</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Computer-Science/">Computer Science</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/25/make-flutter-plugin-part4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/flutter.png" alt="Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T15:00:00.000Z">2019-11-25</time></div>
+                    <a href="/2019/11/25/make-flutter-plugin-part4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">1월 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">11월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                태그
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AOP/">
+                        <span class="tag">AOP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bean/">
+                        <span class="tag">Bean</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DI/">
+                        <span class="tag">DI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOC/">
+                        <span class="tag">IOC</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Kotlin/">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PSA/">
+                        <span class="tag">PSA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer-science/">
+                        <span class="tag">computer science</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/context/">
+                        <span class="tag">context</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cs/">
+                        <span class="tag">cs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/declarative-programming/">
+                        <span class="tag">declarative programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/element-tree/">
+                        <span class="tag">element tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/eslint/">
+                        <span class="tag">eslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/eslint-config/">
+                        <span class="tag">eslint-config</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter/">
+                        <span class="tag">flutter</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter-packages/">
+                        <span class="tag">flutter packages</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter-plugin/">
+                        <span class="tag">flutter plugin</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/imperative-programming/">
+                        <span class="tag">imperative programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/inherited-widget/">
+                        <span class="tag">inherited widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ios/">
+                        <span class="tag">ios</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kotlin/">
+                        <span class="tag">kotlin</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/npm/">
+                        <span class="tag">npm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/programming-paradigm/">
+                        <span class="tag">programming paradigm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/provider/">
+                        <span class="tag">provider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pub-dev/">
+                        <span class="tag">pub.dev</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sentry/">
+                        <span class="tag">sentry</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/server/">
+                        <span class="tag">server</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stateful-widget/">
+                        <span class="tag">stateful widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stateless-widget/">
+                        <span class="tag">stateless widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swift/">
+                        <span class="tag">swift</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/toy-project/">
+                        <span class="tag">toy project</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tslint/">
+                        <span class="tag">tslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/typescript/">
+                        <span class="tag">typescript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/typescript-eslint/">
+                        <span class="tag">typescript-eslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vscode/">
+                        <span class="tag">vscode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/widget/">
+                        <span class="tag">widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/widget-tree/">
+                        <span class="tag">widget tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wifi/">
+                        <span class="tag">wifi</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EB%AA%85%EB%A0%B9%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">명령형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%84%A0%EC%96%B8%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">선언형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/">
+                        <span class="tag">오픈소스</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%ED%94%8C%EB%9F%AC%ED%84%B0-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8/">
+                        <span class="tag">플러터 플러그인</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">함수형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            최근 글
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/09/spring-overview/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/spring_kotlin_logo.png" alt="Spring의 기본 개념 잡아보기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T14:57:21.000Z">2020-04-09</time></div>
+                    <a href="/2020/04/09/spring-overview/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring의 기본 개념 잡아보기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Server/">Server</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/01/eslint/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/eslint_logo.png" alt="ESLint, TSLint, Typescript-ESLint 무엇을 선택해야는가">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T17:09:33.000Z">2020-04-01</time></div>
+                    <a href="/2020/04/01/eslint/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ESLint, TSLint, Typescript-ESLint 무엇을 선택해야는가</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Tools/">Tools</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/02/inheritFromWidgetOfExactType/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/flutter.png" alt="Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T15:00:00.000Z">2020-01-02</time></div>
+                    <a href="/2020/01/02/inheritFromWidgetOfExactType/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/27/programming-paradigm/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/programming_thumbnail.jpg" alt="Programming paradigm과 Flutter UI">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T15:00:00.000Z">2019-12-27</time></div>
+                    <a href="/2019/12/27/programming-paradigm/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Programming paradigm과 Flutter UI</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Computer-Science/">Computer Science</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/25/make-flutter-plugin-part4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/flutter.png" alt="Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T15:00:00.000Z">2019-11-25</time></div>
+                    <a href="/2019/11/25/make-flutter-plugin-part4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">1월 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">11월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                태그
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AOP/">
+                        <span class="tag">AOP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bean/">
+                        <span class="tag">Bean</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DI/">
+                        <span class="tag">DI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOC/">
+                        <span class="tag">IOC</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Kotlin/">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PSA/">
+                        <span class="tag">PSA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer-science/">
+                        <span class="tag">computer science</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/context/">
+                        <span class="tag">context</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cs/">
+                        <span class="tag">cs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/declarative-programming/">
+                        <span class="tag">declarative programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/element-tree/">
+                        <span class="tag">element tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/eslint/">
+                        <span class="tag">eslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/eslint-config/">
+                        <span class="tag">eslint-config</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter/">
+                        <span class="tag">flutter</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter-packages/">
+                        <span class="tag">flutter packages</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter-plugin/">
+                        <span class="tag">flutter plugin</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/imperative-programming/">
+                        <span class="tag">imperative programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/inherited-widget/">
+                        <span class="tag">inherited widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ios/">
+                        <span class="tag">ios</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kotlin/">
+                        <span class="tag">kotlin</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/npm/">
+                        <span class="tag">npm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/programming-paradigm/">
+                        <span class="tag">programming paradigm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/provider/">
+                        <span class="tag">provider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pub-dev/">
+                        <span class="tag">pub.dev</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sentry/">
+                        <span class="tag">sentry</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/server/">
+                        <span class="tag">server</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stateful-widget/">
+                        <span class="tag">stateful widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stateless-widget/">
+                        <span class="tag">stateless widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swift/">
+                        <span class="tag">swift</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/toy-project/">
+                        <span class="tag">toy project</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tslint/">
+                        <span class="tag">tslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/typescript/">
+                        <span class="tag">typescript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/typescript-eslint/">
+                        <span class="tag">typescript-eslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vscode/">
+                        <span class="tag">vscode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/widget/">
+                        <span class="tag">widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/widget-tree/">
+                        <span class="tag">widget tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wifi/">
+                        <span class="tag">wifi</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EB%AA%85%EB%A0%B9%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">명령형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%84%A0%EC%96%B8%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">선언형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/">
+                        <span class="tag">오픈소스</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%ED%94%8C%EB%9F%AC%ED%84%B0-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8/">
+                        <span class="tag">플러터 플러그인</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">함수형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    Wonjerry
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Wonjae Lee&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;" target="_blank" rel="noopener">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html  lang="ko">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Programming paradigm과 Flutter UI - Wonjerry</title>
+
+
+    <meta name="description" content="Flutter는 Declaravitve Programming 방식을 따르며 어떤 Function에 application state를 input으로 넣으면 UI가 생성되도록 한다고 한다. 이와 같은 Programming Paradigm은 어떤것들이 있는지 파보려고 한다.">
+<meta name="keywords" content="flutter,programming paradigm,imperative programming,declarative programming,선언형 프로그래밍,명령형 프로그래밍,함수형 프로그래밍,computer science,cs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Programming paradigm과 Flutter UI">
+<meta property="og:url" content="https:&#x2F;&#x2F;wonjerry.github.io&#x2F;2019&#x2F;12&#x2F;27&#x2F;programming-paradigm&#x2F;index.html">
+<meta property="og:site_name" content="Wonjerry">
+<meta property="og:description" content="Flutter는 Declaravitve Programming 방식을 따르며 어떤 Function에 application state를 input으로 넣으면 UI가 생성되도록 한다고 한다. 이와 같은 Programming Paradigm은 어떤것들이 있는지 파보려고 한다.">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https:&#x2F;&#x2F;wonjerry.github.io&#x2F;images&#x2F;programming_thumbnail.jpg">
+<meta property="og:updated_time" content="2020-04-08T05:51:18.154Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wonjerry.github.io&#x2F;images&#x2F;programming_thumbnail.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108191783-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-108191783-1');
+</script>
+<script data-ad-client="ca-pub-3462032761844105" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="alternate" href="/rss2.xml" title="Wonjerry" type="application/rss+xml">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                Wonjerry
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/wonjerry">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/programming_thumbnail.jpg" alt="Programming paradigm과 Flutter UI">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-26T15:00:00.000Z">2019-12-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Software-Development/Computer-Science/">Computer Science</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    25분 읽기 (나에 대하여 3789 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Programming paradigm과 Flutter UI
+            
+        </h1>
+        <div class="content">
+            <p>Flutter를 공부하다보니 Flutter는 Declaravitve Programming 방식을 따르며 어떤 Function에 application state를 input으로 넣으면 UI가 생성되도록 한다고 한다.</p>
+<p><img src="/images/types-of-paradigms.png" alt></p>
+<p>이제까지는 아무 의구심 없이 Flutter UI를 이런 방식으로 만들어 왔지만 <strong>Declarative Programming</strong>은 뭔지 또 그와 반대되는 <strong>Imperative Programming</strong>은 뭔지 다른 <strong>Programming Paradigm</strong>은 어떤 것들이 있는지 파보려고 한다.</p>
+<h2 id="Introduce-🛫"><a href="#Introduce-🛫" class="headerlink" title="Introduce 🛫"></a>Introduce 🛫</h2><p>어떤 프로그램을 만들 때 그 규모가 커짐에 따라 Complexity가 높아진다. 그리고 이 커진 Complexity는 프로그래머의 가장 큰 적이다. Complexity가 높아지면 높아질수록 우리는 어떤 문제가 생겼을 때 추적하기 어려워지며 관리가 힘들어진다. Complexity가 작을수록 사람이 이해하기 쉬워지고, 문제가 생겼을 때 디버깅을 하기 쉬워진다.</p>
+<p>프로그래머는 이 <strong>Complexity</strong>를 관리하는 데에 많은 노력을 쏟는다. 그렇다면 Complexity를 어떻게 관리해야 할까? <strong>Programming Paradigm</strong>은 프로그래머가 Complexity를 관리하기 위한 여러 방식들을 제시한다.</p>
+<p>각 paradigm이 제시하는 방식에는 장단점이 있고, 우리는 우리가 만드는 프로그램의 성격에 따라 맞는 paradigm을 사용하면 된다.</p>
+<h2 id="Paradigm-🤔"><a href="#Paradigm-🤔" class="headerlink" title="Paradigm? 🤔"></a>Paradigm? 🤔</h2><p>Paradigm은 다른 말로 하면 프로그래밍 스타일이라고 할 수 있다. 이 스타일은 우리가 프로그램을 만드는 방식에 관한 것이지, 프로그래밍 언어에 국한되지는 않는다. 현재 수많은 프로그래밍 언어들이 나오고 있고 각 언어의 문법이 있다. 하지만  이 문법과는 별개로 프로그래밍할 때 <strong>어떤 전략으로 프로그램을 구현할 것 인가</strong>를 생각해야 하는데 <strong>이 전략이 바로 paradigm</strong> 이다.</p>
+<p><img src="/images/types-of-paradigms.png" alt></p>
+<p>[Programming Paradigm의 종류]</p>
+<hr>
+<h2 id="📗-Imperative-programming-paradigm"><a href="#📗-Imperative-programming-paradigm" class="headerlink" title="📗 Imperative programming paradigm"></a>📗 Imperative programming paradigm</h2><p>한국말로 번역하면 명령형 프로그래밍 방식이다. Imperative라는 단어는 I command 라는 의미를 가지는 라틴어 impero 라는 단어에서 유래되었다. 이 패러다임은 이 단어의 의미와 정확히 일치한다.</p>
+<p>우리는 컴퓨터가 수행할 작업들을 순서대로 일일이 명령하며, 컴퓨터는 이것을 수행한다.</p>
+<ol>
+<li><p>수행할 task를 순서대로 작성함</p>
+</li>
+<li><p>어떤 상태들을 가지고 있음</p>
+</li>
+<li><p>task가 하나하나 순서대로 실행됨</p>
+</li>
+<li><p>실행 될 때마다의 결과를 state에 저장함</p>
+</li>
+</ol>
+<p>Imperative programming에서는 task들의 순서가 매우 중요하다. 이전 task의 결과가 다음 task의 input으로 들어가게 되는데 이 순서가 바뀌게 되면 원하는 결과 값을 얻을 수 없기 때문이다. 예시를 들어보자.</p>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">void</span> main() &#123;</span><br><span class="line">  <span class="hljs-built_in">int</span> num1 = <span class="hljs-number">1</span>;</span><br><span class="line">  num1 *= <span class="hljs-number">4</span>;</span><br><span class="line">  num1 = (num1 / <span class="hljs-number">2</span>).floor();</span><br><span class="line">  <span class="hljs-built_in">print</span>(num1); <span class="hljs-comment">// 2</span></span><br><span class="line"></span><br><span class="line">  <span class="hljs-built_in">int</span> num2 = <span class="hljs-number">1</span>;</span><br><span class="line">  num2 = (num2 / <span class="hljs-number">2</span>).floor();</span><br><span class="line">  num2 *= <span class="hljs-number">4</span>;</span><br><span class="line">  <span class="hljs-built_in">print</span>(num2); <span class="hljs-comment">// 0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>위 예시는 1에 4를 곱하고 2를 나눈 것의 몫을 결과 값으로 가지는 것과 1을 2로 나눈 것의 몫과 4를 곱한 것의 결과값을 print 한 것이다. 위의 예시와 같이 순서대로 수행하지 않으면 input이 달라지기 때문에 result가 달라진다.</p>
+<hr>
+<h3 id="Procedural-programming-parardigm"><a href="#Procedural-programming-parardigm" class="headerlink" title="Procedural programming parardigm"></a>Procedural programming parardigm</h3><p>Imperative parardigm 의 한 종류인 procedural programming을 살펴보자. 한국말로 해석하면 절차지향 프로그래밍이라고 할 수 있겠다.</p>
+<p>Procedural programming은 어떤 명령을 어떤 절차들로 쪼갠 것이다. 하지만 이 의미가 <strong>절차 == 함수</strong>는 아니다. 함수는 결과 값을 리턴하지만 절차는 어떠한 값도 리턴하지 않는다.</p>
+<p>좀 더 자세히 얘기해보자. <strong>함수</strong>들은 해당 스코프 내에서 최대한 작은 side effect(프로그래밍에서 side effect란 어떤 변화가 일어나는 행위이다.)를 발생시키며 항상 같은 input이 들어오면 같은 output을 내도록 설계되어있다. <strong>절차</strong>는 어떠한 값도 리턴하지 않으며 단지 원하는 만큼의 side effect를 발생시키는 데에 목적을 둔다.</p>
+<p>예시를 보자.</p>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">void</span> main() &#123;</span><br><span class="line">  <span class="hljs-built_in">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line">  <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">11</span>; i++) &#123;</span><br><span class="line">    sum += i;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-built_in">print</span>(sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>어떤 상태가 있고(sum), 최소 또는 최대가 아닌 원하는 만큼의 side effect를 발생시키고 있고(for loop 10 times), 아무런 값도 return하지 않는다.</p>
+<h4 id="🙋Procedural-programming은-언제-사용하는-게-좋을까"><a href="#🙋Procedural-programming은-언제-사용하는-게-좋을까" class="headerlink" title="🙋Procedural programming은 언제 사용하는 게 좋을까?"></a>🙋Procedural programming은 언제 사용하는 게 좋을까?</h4><ul>
+<li><p>어떤 task들 간의 디펜던시가 있어서 꼭 순서대로 진행해야 할 때</p>
+</li>
+<li><p>중복되는 코드가 거의 없을 때</p>
+</li>
+<li><p>코드가 미래에 바뀔 일이 거의 없을 때</p>
+</li>
+<li><p>해당 프로젝트에 추가될 기능들이 미래에 거의 없다고 생각될 때</p>
+</li>
+</ul>
+<h4 id="🙋Procedural-programming를-왜-써야-할까"><a href="#🙋Procedural-programming를-왜-써야-할까" class="headerlink" title="🙋Procedural programming를 왜 써야 할까?"></a>🙋Procedural programming를 왜 써야 할까?</h4><ul>
+<li><p>쉽다</p>
+</li>
+<li><p>메모리를 적게 먹어서 효율적이다</p>
+</li>
+</ul>
+<hr>
+<h3 id="Object-oriented-programming-paradigm"><a href="#Object-oriented-programming-paradigm" class="headerlink" title="Object oriented programming paradigm"></a>Object oriented programming paradigm</h3><p>OOP는 코드를 모듈화할 수 있고, 실제 세계를 코드에 반영하기 쉽기 때문에 널리 쓰이고있는 programming paradigm이다.</p>
+<p>OOP는 Class, Abstraction, Encapsulation, Inheritance and Polymorphism 다섯 개의 특징을 가지고 있다.</p>
+<ul>
+<li><p>Class는 설계도이다. Object는 class의 인스턴스이며 Object는 상태와 행동을 가진다.</p>
+</li>
+<li><p>Abstraction은 실제 구현과 인터페이스를 분리한다. Encapsulation은 어떤 Object의 내부 구현을 숨기는 과정이다.</p>
+</li>
+<li><p>Inheritance는 Object간의 계층적인 관계를 가지게 한다. Polymorphism는 다른 타입의 Object들에게 같은 메세지를 받을 수 있게 하며 다른 결과물이 나오도록 한다.</p>
+</li>
+</ul>
+<p><strong>⚠️하지만 의문이 하나 든다. 왜 OOP가 Procedural programming과 같은 범주인 imperative programming에 들어가는가??</strong></p>
+<blockquote>
+<p>imperative programming은 명령형 프로그래밍이며, 어떤 task를 순서대로 상세히 명령해야 하며 그 task들의 순서가 중요하다. 그러한 관점에서 OOP는 어떤 클래스들의 동작(메소드)들이 순서대로 동작해며 상호작용해야 하므로 imperative programming 범주에 들어간다.</p>
+</blockquote>
+<h4 id="🙋OOP는-언제-사용하는-게-좋을까"><a href="#🙋OOP는-언제-사용하는-게-좋을까" class="headerlink" title="🙋OOP는 언제 사용하는 게 좋을까?"></a>🙋OOP는 언제 사용하는 게 좋을까?</h4><ul>
+<li>프로그램을 만드는 여러명의 프로그래머가 있으며, 각자의 파트를 몰라도 될 때</li>
+<li>프로그램 내에 많은 코드들이 재사용되어야할때</li>
+<li>프로젝트의 내용이나 기능이 많이 추가되고 바뀔 것이 예상될때</li>
+</ul>
+<h4 id="🙋OOP를-왜-써야-할까"><a href="#🙋OOP를-왜-써야-할까" class="headerlink" title="🙋OOP를 왜 써야 할까?"></a>🙋OOP를 왜 써야 할까?</h4><ul>
+<li>상속을 통한 코드의 재사용</li>
+<li>다형성을 통한 유연함</li>
+<li>개발 생산성을 위해 (빠른 속도, 적은 비용)</li>
+<li>높은 퀄리티의 소프트웨어를 위해</li>
+</ul>
+<hr>
+<h3 id="Parallel-processing-approach"><a href="#Parallel-processing-approach" class="headerlink" title="Parallel processing approach"></a>Parallel processing approach</h3><p>여러 작업을 processor에 나눠서 할당해줘야 할 때 병렬 작업을 한다. 각각을 쪼개서 동시에 처리하기 때문에 적은 시간 안에 테스크를 처리할 수 있다.</p>
+<p>이 paradigm도 병렬처리시 테스트 순서가 중요하기 때문에, 그리고 어떻게 처리되어야 하는지 상세히 명령해야하기 때문에 imperative programming에 속한다.</p>
+<hr>
+<h2 id="📗-Declarative-programming-paradigm"><a href="#📗-Declarative-programming-paradigm" class="headerlink" title="📗 Declarative programming paradigm"></a>📗 Declarative programming paradigm</h2><p>Imperative programming과 반대되는 declarative programming은 한국어로 풀어 얘기하면  선언형 프로그래밍이다.</p>
+<p>이또한 단어의 의미와 같이, 프로그래머가 프로그램을 구현할 때 단지 어떤 기능이 실행되었으면 좋겠다고 선언하는 것이며 그 상세한 구현에 대해서는 선언하지 않는다.</p>
+<p>예를들어보자. Declarative programming은 마치 대통령이 각 장관에게 ~~일을 해주세요 하는 것과 같이 좀 더 큰 범주 내에서 명령을 할 뿐이고 실제로 각 파트의 장관들, 그 하위 계층에서는 어떤 일을 하는지 알지 못한다.</p>
+<p>반대로 Imperative programming은 마치 맥도날드 지점장이 각 알바들에게 손님들에게 친절하게 해라 몇시부터 나와라 하는 등의 세세한 지시를 하는 것과 같다.</p>
+<p>결론적으로 Imperative programming은 <strong>어떤 일을 어떻게</strong> 해야하는지를 나열하는 방식이라면 Declarative programming은 <strong>어떤 일을</strong> 해야하는지를 나열할 뿐 어떻게 해야하는지는 말해주지 않는다. 단지 선언한 대로 동작하기를 기대할 뿐이다.</p>
+<h3 id="Logic-programming-paradigm"><a href="#Logic-programming-paradigm" class="headerlink" title="Logic programming paradigm"></a>Logic programming paradigm</h3><p>이 패러다임은 이름 그대로 로지컬하게 로직을 풀어나간다. 예시를 보는게 가장 빠를듯 하다.</p>
+<p>소크라테스는 사람이고, 모든 사람은 죽으며 따라서 소크라테스는 죽는다는 삼단 논법이 있다고 하자. 이걸 logic programming 으로 나타내면</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man(Socrates) // 소크라테스는 사람이다</span><br><span class="line">mortal(X) :- man(X) // :-기호는 if와 같다. 즉 X가 사람이면 X는 죽는다</span><br></pre></td></tr></table></figure>
+
+<p>위의 코드와 같이 선언해놓으면 어떤 X가 입력으로 들어오면 man인지 확인하고 man이면 mortal이라고 결과값을 뱉는다.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?- mortal(Socrates)</span><br></pre></td></tr></table></figure>
+
+<p>위의 코드 한줄은 Socrates는 죽는가? 라는 의미를 가지며 위에 선언한 <code>mortal(X) :- man(X)</code> 식에 따라 X에는 Socrates가 들어가게 되고 Socrates는 죽는다는 결론이 나온다.</p>
+<h4 id="🙋Logic-programming-paradigm는-언제-사용하는게-좋을까"><a href="#🙋Logic-programming-paradigm는-언제-사용하는게-좋을까" class="headerlink" title="🙋Logic programming paradigm는 언제 사용하는게 좋을까?"></a>🙋Logic programming paradigm는 언제 사용하는게 좋을까?</h4><ul>
+<li>철학적인 문제를 해결하거나 어떤 시스템을 구축할때</li>
+</ul>
+<h4 id="🙋Logic-programming-paradigm를-왜-써야할까"><a href="#🙋Logic-programming-paradigm를-왜-써야할까" class="headerlink" title="🙋Logic programming paradigm를 왜 써야할까?"></a>🙋Logic programming paradigm를 왜 써야할까?</h4><ul>
+<li>코드를 구현하기 쉽다</li>
+<li>디버깅이 쉽다</li>
+<li>true, false로 모든 구조가 이루어져있으면 아주 빠르게 구현 가능하다</li>
+</ul>
+<hr>
+<h3 id="Functional-programming-paradigm"><a href="#Functional-programming-paradigm" class="headerlink" title="Functional programming paradigm"></a>Functional programming paradigm</h3><p>함수형 프로그래밍은 요새 많이 각광받고있고 여기저기서 사용되고있다. 이 패러다임은 수학에 기초하고있으며 프로그래밍 언어와는 독립적인 개념이다. 함수형 프로그래밍의 원리는 수학적인 함수를 연속적으로 실행시키는 것이다.</p>
+<p>모든 변수는 함수 내에 존재하며 짧은 함수들이 연속적으로 실행되면서 이전 output이 다음 input으로 들어가며 계산이 진행된다.</p>
+<p>함수형 프로그래밍에서는 함수 내에 스코프가 아닌 외부 스코프에 있는 변수를 변화시키지 않는다. 오직 자신의 스코프에 있는 변수만 변화시키며 결과값을 리턴할 뿐이다.</p>
+<p>예를들어보자. 어떤 수가 소수인지 아닌지 판단하는 코드가 존재한다.</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPrime</span>(<span class="hljs-params">number</span>) </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt;= <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.sqrt(number)); i++) &#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (number % i == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">isPrime(<span class="hljs-number">15</span>) <span class="hljs-comment">// return false</span></span><br></pre></td></tr></table></figure>
+
+<p>위의 코드에서는 외부 스코프의 변수를 변화시키지도 않는다. 인풋으로 들어온 number를 단지 sqrt와 floor를 통해 변화시키고 i와 비교할 뿐이다. floor, sqrt 는 단지 버림, 루트와 같은 동작을 한다고 메소드 이름이 지어졌을 뿐 내부 구현이 어떻게 되어있는진 모른다. 단지 선언할 뿐이다.</p>
+<h4 id="🙋Functional-programming-paradigm는-언제-사용하는게-좋을까"><a href="#🙋Functional-programming-paradigm는-언제-사용하는게-좋을까" class="headerlink" title="🙋Functional programming paradigm는 언제 사용하는게 좋을까?"></a>🙋Functional programming paradigm는 언제 사용하는게 좋을까?</h4><ul>
+<li>수학적인 계산을 할때</li>
+<li>병행 또는 병렬 처리를 작업을 해야하는 프로그램일때</li>
+</ul>
+<h4 id="🙋Functional-programming-paradigm를-왜-써야할까"><a href="#🙋Functional-programming-paradigm를-왜-써야할까" class="headerlink" title="🙋Functional programming paradigm를 왜 써야할까?"></a>🙋Functional programming paradigm를 왜 써야할까?</h4><ul>
+<li>쉽고 빠르게 구현할 수 있다. (세부 구현은 신경 안쓰고 이어붙이기만 하면 되니까)</li>
+<li>일반적인 목적의 함수들은 계속 재사용되기 때문에 개발 속도가 빠르다.</li>
+<li>테스트, 디버깅이 쉽다.</li>
+</ul>
+<hr>
+<h3 id="Related-to-Flutter-🛎️"><a href="#Related-to-Flutter-🛎️" class="headerlink" title="Related to Flutter 🛎️"></a>Related to Flutter 🛎️</h3><p>Flutter는 declarative programming 방식을 따른다. 물론 내부적으로 서버와 통신을 한다거나 앱의 목적에 따라서 procedural 방식을 따를수도 있고 OOP를 따르며 클래스들이 상호작용하고 상태를 바꾸게 할 수 있다.</p>
+<p>하지만 UI를 만드는 방식은 확실히 declarative하다고 말할 수 있다.</p>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestWidget</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="hljs-meta">@override</span></span><br><span class="line">  _TestWidgetState createState() =&gt; _TestWidgetState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">_TestWidgetState</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">State</span>&lt;<span class="hljs-title">TestWidget</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> name = <span class="hljs-string">'wonjerry'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> Container(</span><br><span class="line">      child: Text(name),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>build 메소드를 보자. 우리는 Container가 어떻게 구현되어있는진 모르겠지만 Container안에 Text라는 자식 위젯을 넣어줬다. Text또한 어떻게 구현되어있는진 모르겠지만 ‘wonjerry’라는 String을 넣어주어서 화면에 text를 띄우는 UI를 구현하였다.</p>
+<p>전형적으로 구현에는 신경쓰지 않고 여러 선언을 통해 원하는 결과값을 도출해내는 Declarative programming 방식이다.</p>
+<p>하지만 UI가 아닌 다른 부분에서는 helper class, model class, api 통신을 위한 class들에서는 OOP를 따르며 어떤 일련의 순서가 중요하며 어떻게 구현되어야하는지 일일이 써줘야 하는 부분도 있다.</p>
+<p>생각해보면 우리가 보통 프로그래밍을 할 때는 프레임워크에서 뭔가를 제공해주지 않는 한 우리는 Imperative 하게 프로그래밍을 할 수 밖에 없다. 예를들면 api 통신을 할때 header를 뭘 넣고 어떤 method를 통해 어떤주소로 어떻게 request를 할것인지 일일히 작성한다.</p>
+<p>하지만 우리는 구현해 나가면서 우리의 프로그램을 관리하기 쉽게, 디버깅하기 쉽고, 구조를 단순하게 구현하기 위해서 중복된 코드를 메소드로, class로 빼고 모듈화 시키면서 wrapping 하게 되며 이러한 과정을 통해 나온 메소드들을 마치 레고 블록을 쌓듯 imperative하게 조합시키면서 프로그램을 완성시키는듯 하다.</p>
+<hr>
+<h2 id="Conclusion-🛬"><a href="#Conclusion-🛬" class="headerlink" title="Conclusion 🛬"></a>Conclusion 🛬</h2><p>Programming paradigm들은 프로그램의 Complexity를 줄여준다. 모든 프로그래머는 어떤 패러다임을 따르는것이 좋겠다는 생각이 든다.</p>
+<p>하지만 조금 더 생각을 해보면 요새 나온 프로그래밍 언어들은 특정한 패러다임을 따르면서 탄생되고, 코그를 짜면서 그 패러다임을 따르도록 유도한다.</p>
+<p>어떤 특정한 하나의 패러다임을 따르는것은 멍청하다고 본다. 오히려 우리가 쓰는 프레임워크, 툴에서 어떤 패러다임을 따르며 만들어졌는지 파악하고 우리가 짜는 코드가 어떤 패러다임을 따르는지 느끼며 각 상황별 적절한 패러다임을 따르면 된다는 생각이 든다.</p>
+<p>궁극적인 목적은 사람이 이해하기 쉽고, 단순하고, 모듈화 시키는 것이다. 그리고 이걸 이루면 디버깅 및 관리가 쉬운 코드를 짤 수 있다. 그리고 이러한 코드를 짜는 프로그래머가 좋은 프로그래머라는 생각이 든다.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/computer-science/" rel="tag">computer science</a>, <a class="has-link-grey -link" href="/tags/cs/" rel="tag">cs</a>, <a class="has-link-grey -link" href="/tags/declarative-programming/" rel="tag">declarative programming</a>, <a class="has-link-grey -link" href="/tags/flutter/" rel="tag">flutter</a>, <a class="has-link-grey -link" href="/tags/imperative-programming/" rel="tag">imperative programming</a>, <a class="has-link-grey -link" href="/tags/programming-paradigm/" rel="tag">programming paradigm</a>, <a class="has-link-grey -link" href="/tags/%EB%AA%85%EB%A0%B9%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" rel="tag">명령형 프로그래밍</a>, <a class="has-link-grey -link" href="/tags/%EC%84%A0%EC%96%B8%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" rel="tag">선언형 프로그래밍</a>, <a class="has-link-grey -link" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" rel="tag">함수형 프로그래밍</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/01/02/inheritFromWidgetOfExactType/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/25/make-flutter-plugin-part4/">
+                <span class="level-item">Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://wonjerry.github.io/2019/12/27/programming-paradigm/';
+        this.page.identifier = '2019/12/27/programming-paradigm/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'wonjerry-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/wonjerry.jpg" alt="Wonjerry">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Wonjerry
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Software Engineer at Skelter Labs
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Seoul, Korea</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        포스트
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        13
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        카테고리
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        태그
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        46
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wonjerry" target="_blank">
+                팔로우</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wonjerry">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com/lwj.wonjerry">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="https://wonjerry.github.io/rss2.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Introduce-🛫">
+        <span class="has-mr-6">1</span>
+        <span>Introduce 🛫</span>
+        </a></li><li>
+        <a class="is-flex" href="#Paradigm-🤔">
+        <span class="has-mr-6">2</span>
+        <span>Paradigm? 🤔</span>
+        </a></li><li>
+        <a class="is-flex" href="#📗-Imperative-programming-paradigm">
+        <span class="has-mr-6">3</span>
+        <span>📗 Imperative programming paradigm</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Procedural-programming-parardigm">
+        <span class="has-mr-6">3.1</span>
+        <span>Procedural programming parardigm</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#🙋Procedural-programming은-언제-사용하는-게-좋을까">
+        <span class="has-mr-6">3.1.1</span>
+        <span>🙋Procedural programming은 언제 사용하는 게 좋을까?</span>
+        </a></li><li>
+        <a class="is-flex" href="#🙋Procedural-programming를-왜-써야-할까">
+        <span class="has-mr-6">3.1.2</span>
+        <span>🙋Procedural programming를 왜 써야 할까?</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Object-oriented-programming-paradigm">
+        <span class="has-mr-6">3.2</span>
+        <span>Object oriented programming paradigm</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#🙋OOP는-언제-사용하는-게-좋을까">
+        <span class="has-mr-6">3.2.1</span>
+        <span>🙋OOP는 언제 사용하는 게 좋을까?</span>
+        </a></li><li>
+        <a class="is-flex" href="#🙋OOP를-왜-써야-할까">
+        <span class="has-mr-6">3.2.2</span>
+        <span>🙋OOP를 왜 써야 할까?</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Parallel-processing-approach">
+        <span class="has-mr-6">3.3</span>
+        <span>Parallel processing approach</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#📗-Declarative-programming-paradigm">
+        <span class="has-mr-6">4</span>
+        <span>📗 Declarative programming paradigm</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Logic-programming-paradigm">
+        <span class="has-mr-6">4.1</span>
+        <span>Logic programming paradigm</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#🙋Logic-programming-paradigm는-언제-사용하는게-좋을까">
+        <span class="has-mr-6">4.1.1</span>
+        <span>🙋Logic programming paradigm는 언제 사용하는게 좋을까?</span>
+        </a></li><li>
+        <a class="is-flex" href="#🙋Logic-programming-paradigm를-왜-써야할까">
+        <span class="has-mr-6">4.1.2</span>
+        <span>🙋Logic programming paradigm를 왜 써야할까?</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Functional-programming-paradigm">
+        <span class="has-mr-6">4.2</span>
+        <span>Functional programming paradigm</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#🙋Functional-programming-paradigm는-언제-사용하는게-좋을까">
+        <span class="has-mr-6">4.2.1</span>
+        <span>🙋Functional programming paradigm는 언제 사용하는게 좋을까?</span>
+        </a></li><li>
+        <a class="is-flex" href="#🙋Functional-programming-paradigm를-왜-써야할까">
+        <span class="has-mr-6">4.2.2</span>
+        <span>🙋Functional programming paradigm를 왜 써야할까?</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Related-to-Flutter-🛎️">
+        <span class="has-mr-6">4.3</span>
+        <span>Related to Flutter 🛎️</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Conclusion-🛬">
+        <span class="has-mr-6">5</span>
+        <span>Conclusion 🛬</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            링크
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.io/wonjerry" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Github</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Software-Development/">
+            <span class="level-start">
+                <span class="level-item">Software Development</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Software-Development/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/Flutter/">
+            <span class="level-start">
+                <span class="level-item">Flutter</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/Server/">
+            <span class="level-start">
+                <span class="level-item">Server</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/Tools/">
+            <span class="level-start">
+                <span class="level-item">Tools</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/git/">
+            <span class="level-start">
+                <span class="level-item">git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/nodejs/">
+            <span class="level-start">
+                <span class="level-item">nodejs</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Software-Development/opensource/">
+            <span class="level-start">
+                <span class="level-item">opensource</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            태그 클라우드
+        </h3>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/AST/" style="font-size: 10px;">AST</a> <a href="/tags/Android/" style="font-size: 12.5px;">Android</a> <a href="/tags/Bean/" style="font-size: 10px;">Bean</a> <a href="/tags/DI/" style="font-size: 10px;">DI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IOC/" style="font-size: 10px;">IOC</a> <a href="/tags/Kotlin/" style="font-size: 12.5px;">Kotlin</a> <a href="/tags/PSA/" style="font-size: 10px;">PSA</a> <a href="/tags/computer-science/" style="font-size: 10px;">computer science</a> <a href="/tags/context/" style="font-size: 10px;">context</a> <a href="/tags/cs/" style="font-size: 10px;">cs</a> <a href="/tags/declarative-programming/" style="font-size: 10px;">declarative programming</a> <a href="/tags/element-tree/" style="font-size: 10px;">element tree</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/eslint-config/" style="font-size: 10px;">eslint-config</a> <a href="/tags/flutter/" style="font-size: 20px;">flutter</a> <a href="/tags/flutter-packages/" style="font-size: 17.5px;">flutter packages</a> <a href="/tags/flutter-plugin/" style="font-size: 17.5px;">flutter plugin</a> <a href="/tags/imperative-programming/" style="font-size: 10px;">imperative programming</a> <a href="/tags/inherited-widget/" style="font-size: 10px;">inherited widget</a> <a href="/tags/ios/" style="font-size: 10px;">ios</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/programming-paradigm/" style="font-size: 10px;">programming paradigm</a> <a href="/tags/provider/" style="font-size: 10px;">provider</a> <a href="/tags/pub-dev/" style="font-size: 10px;">pub.dev</a> <a href="/tags/sentry/" style="font-size: 10px;">sentry</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/stateful-widget/" style="font-size: 10px;">stateful widget</a> <a href="/tags/stateless-widget/" style="font-size: 10px;">stateless widget</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/toy-project/" style="font-size: 15px;">toy project</a> <a href="/tags/tslint/" style="font-size: 10px;">tslint</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/typescript-eslint/" style="font-size: 10px;">typescript-eslint</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/widget-tree/" style="font-size: 10px;">widget tree</a> <a href="/tags/wifi/" style="font-size: 17.5px;">wifi</a> <a href="/tags/%EB%AA%85%EB%A0%B9%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" style="font-size: 10px;">명령형 프로그래밍</a> <a href="/tags/%EC%84%A0%EC%96%B8%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" style="font-size: 10px;">선언형 프로그래밍</a> <a href="/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/" style="font-size: 17.5px;">오픈소스</a> <a href="/tags/%ED%94%8C%EB%9F%AC%ED%84%B0-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8/" style="font-size: 17.5px;">플러터 플러그인</a> <a href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" style="font-size: 10px;">함수형 프로그래밍</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            최근 글
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/09/spring-overview/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/spring_kotlin_logo.png" alt="Spring의 기본 개념 잡아보기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T14:57:21.000Z">2020-04-09</time></div>
+                    <a href="/2020/04/09/spring-overview/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring의 기본 개념 잡아보기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Server/">Server</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/01/eslint/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/eslint_logo.png" alt="ESLint, TSLint, Typescript-ESLint 무엇을 선택해야는가">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T17:09:33.000Z">2020-04-01</time></div>
+                    <a href="/2020/04/01/eslint/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ESLint, TSLint, Typescript-ESLint 무엇을 선택해야는가</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Tools/">Tools</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/02/inheritFromWidgetOfExactType/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/flutter.png" alt="Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T15:00:00.000Z">2020-01-02</time></div>
+                    <a href="/2020/01/02/inheritFromWidgetOfExactType/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/27/programming-paradigm/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/programming_thumbnail.jpg" alt="Programming paradigm과 Flutter UI">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T15:00:00.000Z">2019-12-27</time></div>
+                    <a href="/2019/12/27/programming-paradigm/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Programming paradigm과 Flutter UI</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Computer-Science/">Computer Science</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/25/make-flutter-plugin-part4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/flutter.png" alt="Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T15:00:00.000Z">2019-11-25</time></div>
+                    <a href="/2019/11/25/make-flutter-plugin-part4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">1월 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">11월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                태그
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AOP/">
+                        <span class="tag">AOP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bean/">
+                        <span class="tag">Bean</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DI/">
+                        <span class="tag">DI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOC/">
+                        <span class="tag">IOC</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Kotlin/">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PSA/">
+                        <span class="tag">PSA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer-science/">
+                        <span class="tag">computer science</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/context/">
+                        <span class="tag">context</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cs/">
+                        <span class="tag">cs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/declarative-programming/">
+                        <span class="tag">declarative programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/element-tree/">
+                        <span class="tag">element tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/eslint/">
+                        <span class="tag">eslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/eslint-config/">
+                        <span class="tag">eslint-config</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter/">
+                        <span class="tag">flutter</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter-packages/">
+                        <span class="tag">flutter packages</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter-plugin/">
+                        <span class="tag">flutter plugin</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/imperative-programming/">
+                        <span class="tag">imperative programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/inherited-widget/">
+                        <span class="tag">inherited widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ios/">
+                        <span class="tag">ios</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kotlin/">
+                        <span class="tag">kotlin</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/npm/">
+                        <span class="tag">npm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/programming-paradigm/">
+                        <span class="tag">programming paradigm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/provider/">
+                        <span class="tag">provider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pub-dev/">
+                        <span class="tag">pub.dev</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sentry/">
+                        <span class="tag">sentry</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/server/">
+                        <span class="tag">server</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stateful-widget/">
+                        <span class="tag">stateful widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stateless-widget/">
+                        <span class="tag">stateless widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swift/">
+                        <span class="tag">swift</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/toy-project/">
+                        <span class="tag">toy project</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tslint/">
+                        <span class="tag">tslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/typescript/">
+                        <span class="tag">typescript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/typescript-eslint/">
+                        <span class="tag">typescript-eslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vscode/">
+                        <span class="tag">vscode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/widget/">
+                        <span class="tag">widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/widget-tree/">
+                        <span class="tag">widget tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wifi/">
+                        <span class="tag">wifi</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EB%AA%85%EB%A0%B9%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">명령형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%84%A0%EC%96%B8%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">선언형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/">
+                        <span class="tag">오픈소스</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%ED%94%8C%EB%9F%AC%ED%84%B0-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8/">
+                        <span class="tag">플러터 플러그인</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">함수형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            최근 글
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/09/spring-overview/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/spring_kotlin_logo.png" alt="Spring의 기본 개념 잡아보기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T14:57:21.000Z">2020-04-09</time></div>
+                    <a href="/2020/04/09/spring-overview/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring의 기본 개념 잡아보기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Server/">Server</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/01/eslint/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/eslint_logo.png" alt="ESLint, TSLint, Typescript-ESLint 무엇을 선택해야는가">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-31T17:09:33.000Z">2020-04-01</time></div>
+                    <a href="/2020/04/01/eslint/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ESLint, TSLint, Typescript-ESLint 무엇을 선택해야는가</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Tools/">Tools</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/02/inheritFromWidgetOfExactType/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/flutter.png" alt="Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T15:00:00.000Z">2020-01-02</time></div>
+                    <a href="/2020/01/02/inheritFromWidgetOfExactType/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flutter error - The method ‘inheritFromWidgetOfExactType’ was called on null 에 대한 고찰</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/27/programming-paradigm/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/programming_thumbnail.jpg" alt="Programming paradigm과 Flutter UI">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T15:00:00.000Z">2019-12-27</time></div>
+                    <a href="/2019/12/27/programming-paradigm/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Programming paradigm과 Flutter UI</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Computer-Science/">Computer Science</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/25/make-flutter-plugin-part4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/flutter.png" alt="Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-24T15:00:00.000Z">2019-11-25</time></div>
+                    <a href="/2019/11/25/make-flutter-plugin-part4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Flutter plugin 개발하기 - part4 플러터 플러그인 pub.dev 에 배포하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Software-Development/">Software Development</a> / <a class="has-link-grey -link" href="/categories/Software-Development/Flutter/">Flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            아카이브
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">4월 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">1월 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">11월 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">5월 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">12월 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                태그
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AOP/">
+                        <span class="tag">AOP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AST/">
+                        <span class="tag">AST</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android/">
+                        <span class="tag">Android</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bean/">
+                        <span class="tag">Bean</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DI/">
+                        <span class="tag">DI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IOC/">
+                        <span class="tag">IOC</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Kotlin/">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PSA/">
+                        <span class="tag">PSA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer-science/">
+                        <span class="tag">computer science</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/context/">
+                        <span class="tag">context</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cs/">
+                        <span class="tag">cs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/declarative-programming/">
+                        <span class="tag">declarative programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/element-tree/">
+                        <span class="tag">element tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/eslint/">
+                        <span class="tag">eslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/eslint-config/">
+                        <span class="tag">eslint-config</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter/">
+                        <span class="tag">flutter</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter-packages/">
+                        <span class="tag">flutter packages</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/flutter-plugin/">
+                        <span class="tag">flutter plugin</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/imperative-programming/">
+                        <span class="tag">imperative programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/inherited-widget/">
+                        <span class="tag">inherited widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ios/">
+                        <span class="tag">ios</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/kotlin/">
+                        <span class="tag">kotlin</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/npm/">
+                        <span class="tag">npm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/programming-paradigm/">
+                        <span class="tag">programming paradigm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/provider/">
+                        <span class="tag">provider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pub-dev/">
+                        <span class="tag">pub.dev</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sentry/">
+                        <span class="tag">sentry</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/server/">
+                        <span class="tag">server</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stateful-widget/">
+                        <span class="tag">stateful widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stateless-widget/">
+                        <span class="tag">stateless widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swift/">
+                        <span class="tag">swift</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/toy-project/">
+                        <span class="tag">toy project</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tslint/">
+                        <span class="tag">tslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/typescript/">
+                        <span class="tag">typescript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/typescript-eslint/">
+                        <span class="tag">typescript-eslint</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vscode/">
+                        <span class="tag">vscode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/widget/">
+                        <span class="tag">widget</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/widget-tree/">
+                        <span class="tag">widget tree</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wifi/">
+                        <span class="tag">wifi</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EB%AA%85%EB%A0%B9%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">명령형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%84%A0%EC%96%B8%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">선언형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/">
+                        <span class="tag">오픈소스</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%ED%94%8C%EB%9F%AC%ED%84%B0-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8/">
+                        <span class="tag">플러터 플러그인</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">
+                        <span class="tag">함수형 프로그래밍</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    Wonjerry
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Wonjae Lee&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;" target="_blank" rel="noopener">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
