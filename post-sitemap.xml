@@ -9,7 +9,7 @@
 
     <url>
         <loc>https://wonjerry.github.io/2020/04/09/spring-overview/</loc>
-        <lastmod>2020-04-10T08:44:14.494Z</lastmod>
+        <lastmod>2020-04-10T08:46:50.489Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -48,14 +48,6 @@
     </url>
 
     <url>
-        <loc>https://wonjerry.github.io/2019/11/24/make-flutter-plugin-part3/</loc>
-        <lastmod>2020-04-08T05:51:18.154Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://wonjerry.github.io/2019/12/27/programming-paradigm/</loc>
         <lastmod>2020-04-08T05:51:18.154Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -64,7 +56,15 @@
     </url>
 
     <url>
-        <loc>https://wonjerry.github.io/2020/01/02/inheritFromWidgetOfExactType/</loc>
+        <loc>https://wonjerry.github.io/2019/11/24/make-flutter-plugin-part3/</loc>
+        <lastmod>2020-04-08T05:51:18.154Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wonjerry.github.io/2017/12/07/learn-from-toy-project/</loc>
         <lastmod>2020-04-08T05:51:18.153Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -80,7 +80,7 @@
     </url>
 
     <url>
-        <loc>https://wonjerry.github.io/2017/12/07/learn-from-toy-project/</loc>
+        <loc>https://wonjerry.github.io/2020/01/02/inheritFromWidgetOfExactType/</loc>
         <lastmod>2020-04-08T05:51:18.153Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
