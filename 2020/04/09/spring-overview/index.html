@@ -19,7 +19,7 @@
 <meta property="og:description" content="Kotlin, Spring 환경을 셋업하고 Spring framework 의 중요한 개념인 Inversion Of Control, Dependency Injection, Aspect-Oriented Programming, Portable Service Abstraction 들을 살펴보았다.">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="https:&#x2F;&#x2F;wonjerry.github.io&#x2F;images&#x2F;spring_kotlin_logo.png">
-<meta property="og:updated_time" content="2020-04-10T02:39:32.762Z">
+<meta property="og:updated_time" content="2020-04-10T08:44:14.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wonjerry.github.io&#x2F;images&#x2F;spring_kotlin_logo.png">
 
@@ -212,9 +212,7 @@
 <li>Intellij 기준 class 옆에 어떤 표시가 있으면 Bean으로 등록이 된 것이다.</li>
 <li>오로지 <strong>Bean으로 등록된 객체</strong>만 dependency를 관리 해 준다.</li>
 </ul>
-<h3 id="어떻게-등록하지"><a href="#어떻게-등록하지" class="headerlink" title="어떻게 등록하지?"></a>어떻게 등록하지?</h3><ol>
-<li>Component Scanning<figure class="highlight kotlin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.example.demo</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.runApplication</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoApplication</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">	runApplication&lt;DemoApplication&gt;(*args)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
+<h3 id="어떻게-등록하지-Component-Scanning"><a href="#어떻게-등록하지-Component-Scanning" class="headerlink" title="어떻게 등록하지? - Component Scanning"></a>어떻게 등록하지? - Component Scanning</h3><figure class="highlight kotlin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.example.demo</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.runApplication</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoApplication</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">	runApplication&lt;DemoApplication&gt;(*args)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>보통 Spring project를 생성하면 위와 같이 main 메소드가 있는 Application file이 존재한다.</li>
 </ul>
@@ -508,9 +506,9 @@
         <span class="has-mr-6">1.4</span>
         <span>Bean</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#어떻게-등록하지">
+        <a class="is-flex" href="#어떻게-등록하지-Component-Scanning">
         <span class="has-mr-6">1.4.1</span>
-        <span>어떻게 등록하지?</span>
+        <span>어떻게 등록하지? - Component Scanning</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#DI-Dependency-Injection">
         <span class="has-mr-6">1.5</span>
